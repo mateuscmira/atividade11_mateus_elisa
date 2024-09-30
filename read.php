@@ -17,6 +17,7 @@ $result = $conn -> query($sql);
 if($result -> num_rows > 0) {
     echo"<table border='1'>
     <tr>
+    <th>Id</th>
     <th>Título</th>
     <th>Conteúdo</th>
     <th>Categoria</th>
@@ -28,13 +29,14 @@ if($result -> num_rows > 0) {
         $category = ($row['category_id'] == 1) ? 'Urgente' : 'Não Urgente';
 
         echo "<tr>
+        <td>{$row['id']}</td>
         <td>{$row['title']}</td>
         <td>{$row['content']}</td>
         <td>{$category}</td>
         <td>{$row['created_at']}</td>
         <td>
-        <a href='update.php?user_id={$row['user_id']}'>Editar</a> |
-        <a href='javascript:void(0);' onclick='confirmDelete({$row['user_id']});'>Excluir</a>
+        <a href='update.php?id={$row['id']}'>Editar</a> |
+        <a href='javascript:void(0);' onclick='confirmDelete({$row['id']});'>Excluir</a>
         </td>
         </tr>";
     }
@@ -50,11 +52,11 @@ $conn -> close();
 <script>
 function confirmDelete(id) {
     if (confirm("Você tem certeza que deseja excluir este registro?")) {
-        window.location.href = 'delete.php?user_id=' + id; 
+        window.location.href = 'delete.php?id=' + id; 
     }
 }
 </script>
 <br>
-<button type="button" onclick="window.location.href='';" >Voltar a página inicial</button>  
+<button type="button" onclick="window.location.href='create.php';" >Voltar a página inicial</button>  
 </body>
 </html>
